@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tyma Hijab</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background: #ff4da6;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    nav {
+      background: #fff;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #ff4da6;
+      font-weight: bold;
+    }
+
+    .contact {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .contact a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 30px 0 20px;
+    }
+
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 200px;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 15px;
+      background: #ff4da6;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e60073;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      background: #ff4da6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bienvenue sur Tyma SHOP</h1>
+    <h3>L'élégance à petits prix</h3>
+  </header>
+
+  <nav>
+    <a href="#">Accueil</a>
+    <a href="#">Produits</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <div class="contact">
+    <p><b>Téléphone :</b> <a href="tel:+221770271741">77 027 17 41</a> | 
+    <b>WhatsApp :</b> <a href="https://wa.me/221770271741">whatsapp : 77 027 17 41</a></p>
+  </div>
+
+  <h2>Découvrez nos plus beaux vêtements</h2>
+<!-- Exemple avec un lien -->
+<a href="panier.html">Voir le panier</a>
+
+<!-- Exemple avec un bouton -->
+<button onclick="window.location.href='panier.html'">Voir le panier</button>
+
+  <div class="products">
+    <div class="card">
+      <img src="A.jpg" alt="Robe Blanche">
+      <h3>Robe Blanche</h3>
+      <p>7 000 FCFA</p>
+      <a href="#" class="btn">Ajouter au panier</a>
+    </div>
+
+    <div class="card">
+      <img src="B.jpg" alt="Ensemble Rouge">
+      <h3>Ensemble Rouge</h3>
+      <p>8 000 FCFA</p>
+      <a href="#" class="btn">Ajouter au panier</a>
+    </div>
+
+    <div class="card">
+      <img src="E.jpg" alt="Robe Deux Tons">
+      <h3>Ensemble Deux Tons</h3>
+      <p>7 000 FCFA</p>
+      <a href="#" class="btn">Ajouter au panier</a>
+    </div>
+
+    <div class="card">
+      <img src="D.jpg" alt="Ensemble Noir">
+      <h3>Ensemble Noir</h3>
+      <p>7000 FCFA</p>
+      <a href="#" class="btn">Ajouter au panier</a>
+    </div>
+
+    <div class="card">
+      <img src="F.jpg" alt="Ensemble Blanc">
+      <h3>Ensemble Blanc</h3>
+      <p>6500 FCFA</p>
+      <a href="#" class="btn">Ajouter au panier</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Tyma Hijab - Tous droits réservés</p>
+  </footer>
+  <script>
+  // Sélection des boutons "Ajouter au panier"
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+  const cartCount = document.getElementById('cart-count');
+
+  // Récupération du panier dans le localStorage (ou tableau vide si aucun panier)
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Mettre à jour le compteur
+  function updateCartCount() {
+    cartCount.textContent = cart.length;
+  }
+
+  // Ajouter un produit au panier
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const product = this.parentElement;
+      const name = product.querySelector('h3').textContent;
+      const price = product.querySelector('.price').textContent;
+
+      // On ajoute le produit dans le tableau
+      cart.push({ name, price });
+
+      // On sauvegarde dans le localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Mise à jour du compteur
+ updateCartCount();
+
+      alert(${name} a été ajouté au panier !);
+    });
+  });
+
+  // Affiche le compteur quand on recharge la page
+  updateCartCount();
+</script>
+<!-- Exemple d’un produit -->
+<div class="produit">
+  <h3>Produit 1</h3>
+  <p>Prix : 1000 FCFA</p>
+  <button onclick="ajouterAuPanier('Produit 1', 1000)">Ajouter au panier</button>
+</div>
+
+<script>
+function ajouterAuPanier(nom, prix) {
+    // Récupérer le panier actuel depuis le localStorage
+    let panier = JSON.parse(localStorage.getItem('panier')) || [];
+    
+    // Ajouter le produit
+    panier.push({nom: nom, prix: prix});
+    
+    // Sauvegarder à nouveau
+    localStorage.setItem('panier', JSON.stringify(panier));
+
+    alert(nom + " ajouté au panier !");
+}
+</script>
+  </body>
+</html>
